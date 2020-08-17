@@ -1,0 +1,15 @@
+python-socketio
+eventlet
+pillow
+flask
+tensorflow-gpu==2.2
+scikit-learn
+opencv-python
+absl-py
+numpy
+matplotlib
+seaborn
+pandas
+ffmpeg
+imageio
+moviepy
