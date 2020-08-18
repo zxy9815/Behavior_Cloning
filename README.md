@@ -2,6 +2,24 @@
 
 ## Overview
 
+This project uses Simulator developed by Udacity to collect data and test models. 
+
+When thinking about autonomous driving problems, there would be several very difficult problems that will blow your mind. Take, for instance, the lane keeping problem, developers usually need to break it down into path planning, control and lane detections. However, based on a [paper written by NVIDIA](https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf), deep learning suprisingly performs well in solving this problem without explicitly discomposing the problem into several sub-problems. We call this End-to-End Deep Learning, or Behavioral Cloning.
+
+This project simulates the End-to-End Learning described in NVIDIA's paper. Before the learning process, we need to collect data by driving around an environment and record images captured and our driving behaviors. By feeding our model the driver's behaviors, the model will learn and clone the desired behavior when running in a similar environment. After training the model we built, the outcome should be a mapping from Camera Images to Desired Steering Commands.
+
+I break down this project into 4 parts:
+```
+1. Data Collection: In this part, we will manually drive our car in the simulator and record all images taken by 3 cameras on the car and the corresponding steering commands we made. The more data we collect, the better our model will perform.
+
+2. Pre-processing: Process the images we collected by doing Gaussian Blurring and Coverting it to RGB Color Format
+
+3. Training: In this part, we design our Neural Network Model and train it to minimize the mean square error between model predicted steering command and our recorded command for each image. Refer to "model_nvidia.py" for the CNN model developed by NVIDIA.
+
+4. Testing: Run the trained model ("model.h5") in the simulator. The car is set to run in constant speed. Check how your model performs. This time, the input should be images captured by a single camera and output the steering commands.
+```
+
+Of course we cannot use this single model to solve the autonomous driving problems in the real world. This is just a simple way to let a machine learn how to drive. But from this project we can see how deep neural networks are able to learn such a complicated problem without extracting features explicitly.
 
 Project Manual
 ---
