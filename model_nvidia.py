@@ -88,6 +88,7 @@ def LeNet_model():
     model.add(Dense(84, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(1))
+    model.summary()
     return model
 
 
@@ -117,10 +118,40 @@ def Nvidia_model():
     model.summary()
     return model
 
+def zxy_model():
+    input_shape = (160, 320, 3)
+    model = Sequential()
+    model.add(Lambda(lambda x: x/127.5 - 1., input_shape=input_shape))
+    model.add(Cropping2D(cropping = ((50,20), (0,0))))
+    model.add(Conv2D(16, (5,5), strides=(2,2), activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Conv2D(32, (5,5), strides=(2,2), activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Conv2D(48, (3,3), strides=(2,2), activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Conv2D(64, (3,3), strides=(1,1), activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Conv2D(72, (3,3), strides=(1,1), activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Flatten())
+    model.add(Dense(120, activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(60, activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(15, activation='elu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(1))
+    model.summary()
+    return model
+
+
+
 
 def create_model():
     if FLAGS.model_type == 'nvidia':
         return Nvidia_model()
+    else if FLAGS.model_type == 'zxy':
+        return zxy_model()
     return LeNet_model()
 
 
